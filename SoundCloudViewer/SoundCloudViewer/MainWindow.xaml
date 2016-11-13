@@ -1,0 +1,21 @@
+﻿<Window x:Class="SoundCloudViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SoundCloudViewer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="120" Width="300">
+    <!--<Grid Background="Black">
+        <TextBlock Height="30" Foreground="White" FontSize="18"  TextAlignment="Center" Margin="12,12,12,0" Name="txtSongName" Text="asdf" VerticalAlignment="Top"  />
+        <TextBlock Height="30" Foreground="White" FontSize="14"  TextAlignment="Center" Margin="12,48,12,0" Name="txtSongInfo" Text="abawse" VerticalAlignment="Top" />
+    </Grid>-->
+    <Canvas >
+        <Canvas Margin="0" Canvas.Left="0" Canvas.Top="0" ClipToBounds="True" Name="canMain" Background="Black"   Height="120" Width="300"  >
+            <TextBlock Margin="0,12,0,0" FontSize="18" Name="txtSongName" Foreground="White" TextAlignment="Center" Height="30" Width="300"></TextBlock>
+            <TextBlock Margin="0,48,0,0" FontSize="14" Name="txtSongInfo" Foreground="White" TextAlignment="Center" Height="30" Width="300"></TextBlock>
+        </Canvas>
+
+        <!--<TextBlock Height="30" Foreground="White" FontSize="14"  TextAlignment="Center" Margin="12,48,12,0" Name="txtSongInfo" Text="" VerticalAlignment="Top" />-->
+    </Canvas>
+</Window>
