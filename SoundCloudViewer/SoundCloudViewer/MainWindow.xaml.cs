@@ -27,7 +27,7 @@ namespace SoundCloudViewer
         public static String SongName = "";
         public static String SongInfo = "";
         private SoundCloud SoundCloud;
-        private int MainWidth = 300;
+        private int MainWidth = 292;
 
         public MainWindow()
         {
@@ -91,7 +91,7 @@ namespace SoundCloudViewer
                 EndLoopingName();
                 txtSongName.Text = SongName;
                 txtSongInfo.Text = SongInfo;
-                if (SongName.Count() > 31)
+                if (SongName.Count() > 30)
                 {
                     txtSongName.Width = SongName.Count() * 9.7;
                     StartLoopingName();
