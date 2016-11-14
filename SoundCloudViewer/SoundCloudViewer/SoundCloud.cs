@@ -37,11 +37,8 @@ namespace SoundCloudViewer
 
         public void GetInfo()
         {
-            //var player = FindElement("//*/div[@class=\"playControls__inner\"]");
-
             MainWindow.SongName = "";
             MainWindow.SongInfo = "";
-
             if (Browser.Url.ToLower().Contains("soundcloud"))
             {
                 var songInfo = Browser.Title;

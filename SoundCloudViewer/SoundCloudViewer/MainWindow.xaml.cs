@@ -35,11 +35,9 @@ namespace SoundCloudViewer
 
             SoundCloud = new SoundCloud();
             var timer = new DispatcherTimer();
-            var temp = new BackgroundWorker();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += new EventHandler(Loop);
             timer.Start();
-            //UpdateUI();
         }
 
 
@@ -85,10 +83,9 @@ namespace SoundCloudViewer
 
         private void UpdateUI()
         {
-
             var tempName = txtSongName.Text;
             var tempInfo = txtSongInfo.Text;
-            if (tempName != SongName && tempInfo != SongInfo)
+            if (tempName != SongName || tempInfo != SongInfo)
             {
                 EndLoopingInfo();
                 EndLoopingName();
@@ -105,8 +102,6 @@ namespace SoundCloudViewer
                     StartLoopingInfo();
                 }
             }
-
-
         }
     }
 }
