@@ -97,7 +97,8 @@ namespace SoundCloudViewer
         {
             MainWindow.SongName = "";
             MainWindow.SongInfo = "";
-            IWebElement infoElement = FindElement("//*[@id=\"app\"]/div[4]/div/div/div[1]/div/div[1]/a[2]");
+            //*[@id="app"]/div[4]/div/div/div[2]/div/div[1]/a[2]
+            IWebElement infoElement = FindElement("//*[@id=\"app\"]/div[4]/div/div/div[2]/div/div[1]/a[2]");
             if (infoElement != null)
             {
                 var href = infoElement.GetAttribute("href");
