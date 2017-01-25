@@ -83,23 +83,27 @@ namespace SoundCloudViewer
 
         private void UpdateUI()
         {
-            var tempName = txtSongName.Text;
-            var tempInfo = txtSongInfo.Text;
-            if (tempName != SongName || tempInfo != SongInfo)
+            if (SongName != "error" && SongInfo != "error")
             {
-                EndLoopingInfo();
-                EndLoopingName();
-                txtSongName.Text = SongName;
-                txtSongInfo.Text = SongInfo;
-                if (SongName.Count() > 30)
+                var tempName = txtSongName.Text;
+                var tempInfo = txtSongInfo.Text;
+                if (tempName != SongName || tempInfo != SongInfo)
                 {
-                    txtSongName.Width = SongName.Count() * 9.7;
-                    StartLoopingName();
-                }
-                if(SongInfo.Count() > 39)
-                {
-                    txtSongInfo.Width = SongInfo.Count() * 7.6;
-                    StartLoopingInfo();
+                    SoundCloud.PrintSongInfo();
+                    EndLoopingInfo();
+                    EndLoopingName();
+                    txtSongName.Text = SongName;
+                    txtSongInfo.Text = SongInfo;
+                    if (SongName.Count() > 30)
+                    {
+                        txtSongName.Width = SongName.Count() * 9.7;
+                        StartLoopingName();
+                    }
+                    if (SongInfo.Count() > 39)
+                    {
+                        txtSongInfo.Width = SongInfo.Count() * 7.6;
+                        StartLoopingInfo();
+                    }
                 }
             }
         }

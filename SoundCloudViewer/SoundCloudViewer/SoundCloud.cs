@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -16,13 +17,14 @@ namespace SoundCloudViewer
         private ChromeDriver Browser;
         private String CurrentInfo = "";
         private String CurrentFullInfo = "";
-
+        private String FileName;
+        private String SoundCloudURL;
 
         public SoundCloud()
         {
             Browser = new ChromeDriver(@"..\..\Selenium");
             Browser.Navigate().GoToUrl("https://soundcloud.com/");
-            
+            FileName = @"c:\Temp\" + DateTime.Now.Ticks + ".txt";
         }
 
         private IWebElement FindElement(String xpath)
@@ -44,6 +46,7 @@ namespace SoundCloudViewer
             string info = "";
             var temp = href.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
             var tempInfo = temp[2];
+            SoundCloudURL = "http://SoundCloud.com" + href.Split(new char[] { '?' }, StringSplitOptions.RemoveEmptyEntries)[0];
             if (tempInfo != CurrentInfo)
             {
                 CurrentInfo = temp[2];
@@ -100,7 +103,7 @@ namespace SoundCloudViewer
             //*[@id="app"]/div[4]/div/div/div[2]/div/div[1]/a[2]
             //*[@id="app"]/div[4]/div/div/div[2]/div[4]/div/div[1]/a[2]
             IWebElement infoElement = FindElement("//a[contains(@class, 'playbackSoundBadge__title')]");
-                //FindElement("//*[@id=\"app\"]/div[4]/div/div/div[2]/div[4]/div/div[1]/a[2]");
+            //FindElement("//*[@id=\"app\"]/div[4]/div/div/div[2]/div[4]/div/div[1]/a[2]");
             if (infoElement != null)
             {
                 try
@@ -114,12 +117,40 @@ namespace SoundCloudViewer
                     }
                 }
                 catch (OpenQA.Selenium.StaleElementReferenceException) {
-                    MainWindow.SongName = "";
-                    MainWindow.SongInfo = "";
+                    MainWindow.SongName = "error";
+                    MainWindow.SongInfo = "error";
                 }
                 Console.WriteLine("");
             }
         }
+        
+
+        public void PrintSongInfo()
+        {
+            if (!File.Exists(FileName))
+            {
+                if (!Directory.Exists(@"c:/Temp"))
+                {
+                    Directory.CreateDirectory(@"c:/Temp");
+                }
+                using (StreamWriter sw = File.CreateText(FileName))
+                {
+                    sw.WriteLine("Music:");
+                    sw.WriteLine("");
+                }
+            }
+            if (File.Exists(FileName) && MainWindow.SongName != "" && MainWindow.SongInfo != "")
+            {
+                using (StreamWriter sw = File.AppendText(FileName))
+                {
+                    sw.WriteLine("Song: " + MainWindow.SongName);
+                    sw.WriteLine("Artist/Source: " + MainWindow.SongInfo);
+                    sw.WriteLine("URL: " + SoundCloudURL);
+                    sw.WriteLine("");
+                }
+            }
+        }
+        
 
 
     }
