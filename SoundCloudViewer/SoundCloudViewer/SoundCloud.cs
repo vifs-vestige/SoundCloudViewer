@@ -98,28 +98,27 @@ namespace SoundCloudViewer
             MainWindow.SongName = "";
             MainWindow.SongInfo = "";
             //*[@id="app"]/div[4]/div/div/div[2]/div/div[1]/a[2]
-            IWebElement infoElement = FindElement("//*[@id=\"app\"]/div[4]/div/div/div[2]/div/div[1]/a[2]");
+            //*[@id="app"]/div[4]/div/div/div[2]/div[4]/div/div[1]/a[2]
+            IWebElement infoElement = FindElement("//a[contains(@class, 'playbackSoundBadge__title')]");
+                //FindElement("//*[@id=\"app\"]/div[4]/div/div/div[2]/div[4]/div/div[1]/a[2]");
             if (infoElement != null)
             {
-                var href = infoElement.GetAttribute("href");
-                var info = GetInfo(href);
-                if(info != "")
+                try
                 {
-                    MainWindow.SongName = infoElement.GetAttribute("title");
-                    MainWindow.SongInfo = info;
+                    var href = infoElement.GetAttribute("href");
+                    var info = GetInfo(href);
+                    if (info != "")
+                    {
+                        MainWindow.SongName = infoElement.GetAttribute("title");
+                        MainWindow.SongInfo = info;
+                    }
+                }
+                catch (OpenQA.Selenium.StaleElementReferenceException) {
+                    MainWindow.SongName = "";
+                    MainWindow.SongInfo = "";
                 }
                 Console.WriteLine("");
             }
-            //if (Browser.Url.ToLower().Contains("soundcloud"))
-            //{
-            //    var songInfo = Browser.Title;
-            //    if (songInfo.Contains("by"))
-            //    {
-            //        var temp = songInfo.Split(new[] { "by" }, StringSplitOptions.None);
-            //        MainWindow.SongName = temp[0].Trim();
-            //        MainWindow.SongInfo = temp[1].Trim();
-            //    }
-            //}
         }
 
 
